@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="{{url_for('static', filename= 'login/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="{{url_for('static', filename= 'login/fonts/fontawesome-all.min.css')}}">
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10" style="width: 1233px;height: 829.734px;">
+                <div class="card shadow-lg o-hidden border-0 my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-flex">
+                                <div class="flex-grow-1 bg-login-image"
+                                    style="background-image: url(&quot;static/login/img/utt/IMG_9806.jpg&quot;);width: 622px;">
+                                </div>
+                            </div>
+                            <div class="col-lg-6" style="height: 553.359px;">
+                                <div class="p-5" style="height: 461.359px;">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">Welcome Back!</h4>
+                                    </div>
+                                    <form class="user" , method="POST">
+                                        <div class="mb-3"><input class="form-control form-control-user" type="text"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Tên đăng nhập" name="email" style="border-style: solid;">
+                                        </div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="password"
+                                                id="exampleInputPassword" placeholder="Mật khẩu" name="password"
+                                                style="border-style: solid;"></div>
+                                        <div class="mb-3">
+                                            <div class="custom-control custom-checkbox small"></div>
+                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit"
+                                            style="padding: 15px 16px;", name="submit">Đăng nhập</button>
+                                    <br>
+                                    <br>
+
+                                    </form>
+                                    {% if notify%}
+                                        <div class="text-center">{{notify}}</div>
+                                        <br>
+                                    {% endif %}
+                                    
+                                    <div class="text-center"><a class="small" href="quenmatkhau">Quên mật khẩu
+                                            ?</a></div>
+                                    <div class="text-center"><a class="small" href="dangky">Tạo tài khoản ?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="static/login/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/login/js/theme.js"></script>
+</body>
+
+</html>
