@@ -19,4 +19,148 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %}
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar  bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar-1">
+                    <li class="nav-item"><a
+                            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                            href="#">
+                            <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-school"
+                                    style="transform: rotate(15deg);"></i></div>
+                            <div class="sidebar-brand-text mx-3"><span
+                                    style="padding: 0px;margin: 0px;height: 8px;width: 7px;">QLSV</span></div>
+                        </a><a class="nav-link active" href="qlsv"><i class="fas fa-table"></i><span>Quản lý sinh
+                                viên</span></a></li>
+                </ul>
+                <ul class="navbar-nav text-light" id="accordionSidebar-2">
+                    <li class="nav-item"><a class="nav-link active" href="qllop"><i
+                                class="fas fa-table"></i><span>Quản lý lớp</span></a></li>
+                </ul>
+                <ul class="navbar-nav text-light" id="accordionSidebar-4">
+                    <li class="nav-item"><a class="nav-link active" href="api"><i
+                                class="fas fa-table"></i><span>API</span></a></li>
+                </ul>
+                <ul class="navbar-nav text-light" id="accordionSidebar-2">
+                    <li class="nav-item"></li>
+                </ul>
+                <ul class="navbar-nav text-light" id="accordionSidebar-3">
+                    <li class="nav-item"></li>
+                </ul>
+                <div class="navbar-nav text-light"></div><button class="btn rounded-circle border-0"
+                    id="sidebarToggle" type="button"></button>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><img
+                            style="width: 292px;height: 88px;" src="static/ql/img/logo-utt.png">
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group"></div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
+                                    aria-expanded="false" data-bs-toggle="dropdown" href="#"><i
+                                        class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
+                                    aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small"
+                                                type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0"
+                                                    type="text"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1"></li>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 offset-xl-6 text-nowrap" style="margin: -2px;">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                    </div><button class="btn btn-primary" type="button", onclick= "window.location.href='{{ url_for( 'add_qlsv'  ) }}';"
+                                        style="margin: 5px;">Thêm</button><button class="btn btn-primary"
+                                        type="button" style="margin: 5px;" onclick="sortTable()">Sort</button>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
+                                            class="form-label"><input type="search" id="myInput" onkeyup="myFunction()"
+                                                class="form-control form-control-sm" aria-controls="dataTable"
+                                                placeholder="Tìm kiếm" style="width: 236px;margin: 10px;"></label></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                                aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Họ tên</th>
+                                            <th>Lớp</th>
+                                            <th>Khoa</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Tuổi</th>
+                                            <th>GPA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                        {% for i in list_sv %}
+                                
+                                        <tr>
+                                            <td><a href="{{url_for('update_qlsv', id= i.0)}}">{{i.0}}</a></td>
+                                            <td>{{i.1}}</td>
+                                            <td>{{i.2}}</td>
+                                            <td>{{i.3}}</td>
+                                            <td>{{i.4}}</td>
+                                            <td>{{i.5}}</td>
+                                            <td>{{i.6}}  </td>
+                                            <td><a href="{{url_for('delete_qlsv', id= i.0) }}">Delete</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td><strong>ID</strong></td>
+                                            <td><strong>Họ tên</strong></td>
+                                            <td><strong>Lớp</strong></td>
+                                            <td><strong>Khoa</strong></td>
+                                            <td><strong>Địa chỉ</strong></td>
+
+                                            <td><strong>Tuổi</strong></td>
+                                            <td><strong>GPA</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/ql/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/ql/js/theme.js"></script>
 </body>
