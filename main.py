@@ -129,6 +129,66 @@ def add_qlsv():
 
         return render_template('qlsv/qlsv_update.html',title= 'QLSV', hoten= sinhvien[0],
                 age= sinhvien[1], lop= sinhvien[2], diachi= sinhvien[3])
+# QLlop
+@app.route('/qllop', methods=['GET'])
+def qllop():
+    list_lop= Model('./database/qlsv.db').query('select * from lop;', all= True)
+    print(list_lop)
+    return render_template('/qllop/qllop_table.html', title= 'QLLOP',list_lop= list_lop, username= session['name'])
+
+@app.route('/deleteqllop/<string:id>')
+def delete_qllop(id):
+    # id = tenlop 
+    try:
+        Model('./database/qlsv.db').action(f"delete from lop where tenlop= '{id}'")
+        flash('Xoá thành công')
+        return redirect(url_for('qllop'))
+    except:
+        flash('Không xoá được')
+        return redirect(url_for('qllop'))
+
+@app.route('/updatesqllop/<string:id>', methods= ['GET','POST'])
+def update_qllop(id):
+    if request.method== 'POST': 
+        tenlop= request.form['tenlop']
+        sosv= request.form['sosv']
+        gvcn= request.form['gvcn']
+
+        try: 
+            Model('./database/qlsv.db').action(f"update lop set tenlop= '{tenlop}', sosv= '{sosv}', gvcn= '{gvcn}' where tenlop = '{id}'; ")
+            flash('Cập nhật thành công')
+            return redirect(url_for('qllop'))
+        except:
+            flash('Cập nhật không thành công')
+            return redirect(url_for('qllop'))
+    else:
+        lopinfo= Model('./database/qlsv.db').query(f"select * from lop where tenlop = '{id}';", all= False)
+
+        return render_template('qllop/qllop_update.html',title= 'QLSV', tenlop= lopinfo[0],
+                sosv= lopinfo[1], gvcn= lopinfo[2], username= session['name'])
+
+
+@app.route('/addqllop', methods=['GET', 'POST'])
+def add_qllop():
+    if request.method== 'POST': 
+        tenlop= request.form['tenlop']
+        sosv= request.form['sosv']
+        gvcn= request.form['gvcn']
+        
+        try: 
+            Model('./database/qlsv.db').action(f"insert into lop values('{tenlop}', '{sosv}', '{gvcn}'); ")
+            flash('Thêm thành công' )
+            
+            return redirect(url_for('qllop'))
+        except:
+            flash('Thêm không thành công')
+            return redirect(url_for('qllop'))
+    else:
+        
+        lopinfo= ['70DCTTxx', '5x', 'Nguyễn Văn A']
+        return render_template('qllop/qllop_update.html',title= 'QLSV', tenlop= lopinfo[0],
+                sosv= lopinfo[1], gvcn= lopinfo[2], username= session['name'])
+
 
 if __name__== '__main__':
     app.run(port= 5502, debug= True)
